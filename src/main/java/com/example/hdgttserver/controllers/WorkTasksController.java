@@ -1,17 +1,16 @@
 package com.example.hdgttserver.controllers;
 
+import com.example.hdgttserver.dtos.responses.WorkTaskDto;
 import com.example.hdgttserver.dtos.responses.WorkTasksByUserIdDto;
 import com.example.hdgttserver.services.WorkTasksService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("work-tasks")
+@CrossOrigin
 @RequiredArgsConstructor
 public class WorkTasksController {
     private final WorkTasksService workTasksService;
@@ -19,5 +18,10 @@ public class WorkTasksController {
     @GetMapping("/get-all-by-userid/{userId}")
     public List<WorkTasksByUserIdDto> getAllByUserId(@PathVariable Integer userId) {
         return workTasksService.getAllByUserId(userId);
+    }
+
+    @GetMapping("/get-by-id/{id}")
+    public WorkTaskDto getByUserId(@PathVariable Integer id) {
+        return workTasksService.getAllById(id);
     }
 }
